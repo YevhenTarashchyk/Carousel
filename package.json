@@ -12,6 +12,7 @@
     "connected-react-router": "^6.5.2",
     "history": "^4.9.0",
     "lodash": "^4.17.15",
+    "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dnd": "^9.3.4",
