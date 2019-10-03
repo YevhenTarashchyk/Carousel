@@ -1,10 +1,10 @@
 import React from "react";
 
 import "./App.css";
-import Slider from "./components/Slider/Slider";
+import Slider from "./container/Slider/Slider";
 
 const App = () => {
-  return <Slider interval={10000} />;
+  return <Slider />;
 };
 
 export default App;
