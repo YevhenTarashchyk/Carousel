@@ -1,3 +1,7 @@
+:root {
+  --scale--ratio: 1;
+}
+
 .slider-wrapper {
   position: relative;
   height: 50vh;
@@ -20,7 +24,7 @@
   box-sizing: border-box;
   position: absolute;
   width: 100%;
-  top: 80%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -28,35 +32,36 @@
   font-weight: 900;
   margin: 0 auto;
   max-width: 840px;
-  color: #8e4336bf;
+  color: rgb(208, 118, 118, 0.81);
   font-size: 55px;
   line-height: 1;
 }
 
 .slide .inner p {
-  color: #736462;
-  font-size: 18px;
+  color: #fff;
+  font-size: 14px;
   line-height: 1.5;
-  margin: 20px auto 10px;
+  margin: 20px auto 30px;
 }
 
 .nextArrow,
 .backArrow {
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #f9f9f9;
   border-radius: 50%;
   cursor: pointer;
-  transition: transform ease-in 0.1s;
+  transform: scale(var(--scale--ratio)) translateY(-50%);
+  transition: all ease-in 0.2s;
 }
 
 .nextArrow:hover,
 .backArrow:hover {
-  transition: transform ease-in 0.1s;
-  transform: scale(1.1);
+  --scale--ratio: 1.1;
+  background: #e0dede;
 }
 
 .nextArrow {
@@ -80,8 +85,32 @@
   color: #fff;
 }
 
-.progress-bar {
+.dots-wrapper {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  width: auto;
+  z-index: 999;
+  display: flex;
+}
+.dot {
+  color: #f7f6f6;
+  font-size: 2.5em;
+  cursor: pointer;
+  margin: 0 3px;
+  text-shadow: 2px -2px 3px #f5d4d4;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+/* .progress-bar {
   height: 5px;
   width: 0;
   background-color: #fec32b;
+} */
+
+@media (max-width: 640px) {
+  .slide .inner h1 {
+    font-size: 32px;
+  }
 }

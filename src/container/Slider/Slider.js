@@ -1,34 +1,53 @@
 import React, { Component } from "react";
 import makeCarousel from "react-reveal/makeCarousel";
 import Slide from "react-reveal/Slide";
+import Zoom from "react-reveal/Zoom";
+import Fade from "react-reveal/Fade";
+import Flash from "react-reveal/Flash";
 
 import initialState from "../../store/data";
 import "./Slider.css";
-// import { LeftArrow, RightArrow } from "../../components/Arrows/Arrows";
 
-const CarouselUI = ({ children }) => (
-  <div className="slider-wrapper">{children}</div>
+const CarouselUI = ({ position, handleClick, children, total }) => (
+  <div className="slider-wrapper">
+    {children}
+    <div
+      onClick={handleClick}
+      data-position={position - 1}
+      className="backArrow"
+    >
+      <i className="fa fa-arrow-left fa-lg" aria-hidden="true"></i>
+    </div>
+    <div
+      onClick={handleClick}
+      data-position={position + 1}
+      className="nextArrow"
+    >
+      <i className="fa fa-arrow-right fa-lg" aria-hidden="true"></i>
+    </div>
+    <div className="dots-wrapper">
+      {Array(...Array(total)).map((val, index) => (
+        <div
+          key={index}
+          onClick={handleClick}
+          data-position={index}
+          className="dot"
+        >
+          {index === position ? <Flash>● </Flash> : "○ "}
+        </div>
+      ))}
+    </div>
+  </div>
 );
 const Carousel = makeCarousel(CarouselUI);
 
 const slides = [].concat(initialState.slides);
+
 export default class Slider extends Component {
   state = {
     ...initialState,
     slides
   };
-
-  // anotherSlide = e => {
-  //   if (e.currentTarget.dataset.direction === "next") {
-  //     this.setState(prevState => ({
-  //       currentIndex: prevState.currentIndex + 1
-  //     }));
-  //   } else {
-  //     this.setState(prevState => ({
-  //       currentIndex: prevState.currentIndex - 1
-  //     }));
-  //   }
-  // };
 
   // onMouseEnter = () => {
   //   this.progressBarAnimation.restart();
@@ -58,9 +77,8 @@ export default class Slider extends Component {
 
   render() {
     const { slides } = this.state;
-    console.log(this.props);
     return (
-      <Carousel defaultWait={1000}>
+      <Carousel defaultWait={10000} swipe={false} forever>
         {slides.map((item, index) => (
           <Slide key={index} right>
             <div className="slide-container">
@@ -71,28 +89,19 @@ export default class Slider extends Component {
                 }}
               >
                 <div className="inner">
-                  <h1>{item.title}</h1>
-                  <p>{item.description}</p>
+                  <Fade top delay={500} duration={1200}>
+                    <h1>{item.title}</h1>
+                  </Fade>
+
+                  <Zoom delay={1000} duration={1500}>
+                    <p>{item.description}</p>
+                  </Zoom>
                 </div>
               </div>
             </div>
           </Slide>
         ))}
       </Carousel>
-      // <div className="slider">
-      //   <div
-      //     className="slider-wrapper"
-      //     // ref={node => (this.container = node)}
-      //   >
-      //     {this.state.currentIndex}
-      //     {this.state.slides.map((slide, index) => {
-      //       return <Slide key={index} image={slide.image} />;
-      //     })}
-      //   </div>
-
-      //   <LeftArrow goToPrevSlide={this.anotherSlide} />
-      //   <RightArrow goToNextSlide={this.anotherSlide} />
-      // </div>
     );
   }
 }

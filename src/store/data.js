@@ -43,7 +43,5 @@ export default {
       image:
         "https://static1.squarespace.com/static/51b3dc8ee4b051b96ceb10de/t/5b252ac32b6a28864415fe62/1529162441560/new-wonder-woman-1984-photo-features-gal-gadot-in-full-costume-social.jpg?format=2500w"
     }
-  ],
-  currentIndex: 0,
-  isCycleMode: false
+  ]
 };
